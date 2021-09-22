@@ -13,7 +13,9 @@ public class User {
     private String email;
     private String profilePictureUrl;
 
-    @OneToOne(mappedBy = "idprofile", cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    private Profile profile;
 
     public User() {
     }
@@ -69,5 +71,13 @@ public class User {
 
     public void setProfilePictureUrl(String profilePictureUrl) {
         this.profilePictureUrl = profilePictureUrl;
+    }
+    
+    public Profile getProfile() {
+        return profile;
+    }
+
+    public void setProfile(Profile aProfile) {
+        profile = aProfile;
     }
 }
