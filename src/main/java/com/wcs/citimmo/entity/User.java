@@ -13,11 +13,18 @@ public class User {
     private String email;
     private String profilePictureUrl;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
     public User() {
+    }
+
+    public User(String name, String surname, String email, Profile profile) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.profile = profile;
     }
 
     public User(String name, String surname, String email) {
