@@ -18,6 +18,11 @@ public class Profile {
         this.label = label;
     }
 
+    public Profile(int id, String label) {
+        this.id = id;
+        this.label = label;
+    }
+
     public int getId() {
         return id;
     }

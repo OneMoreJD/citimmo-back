@@ -8,6 +8,7 @@ public class RegisterDto {
     private String password;
     private String phone;
     private String profilePictureUrl;
+    private ProfileDto profileDto;
 
     public RegisterDto() {
     }
@@ -33,6 +34,15 @@ public class RegisterDto {
         this.password = password;
         this.phone = phone;
         this.profilePictureUrl = profilePictureUrl;
+    }
+
+    public RegisterDto(String firstname, String lastname, String email, String password, String phone, ProfileDto profileDto) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.profileDto = profileDto;
     }
 
     public int getId() {
@@ -89,5 +99,13 @@ public class RegisterDto {
 
     public void setProfilePictureUrl(String profilePictureUrl) {
         this.profilePictureUrl = profilePictureUrl;
+    }
+
+    public ProfileDto getProfileDto() {
+        return profileDto;
+    }
+
+    public void setProfileDto(ProfileDto profileDto) {
+        this.profileDto = profileDto;
     }
 }
