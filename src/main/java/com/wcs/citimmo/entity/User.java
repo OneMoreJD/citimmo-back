@@ -16,18 +16,20 @@ import java.util.Collection;
 public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-    private String firstName;
-    private String lastName;
+    private int id;
+    private String firstname;
+    private String lastname;
     private String email;
     @Column(unique=true)
     private String username;
     @JsonIgnore
     private String password;
     private String profilePictureUrl;
+    private String phone;
+    @Column(length = 4096)
+    private String password;
 
-  //  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 
@@ -36,22 +38,26 @@ public class User implements UserDetails {
     private boolean credentialsNonExpired;
     private boolean enabled;
 
-    public User(String firstName, String lastName, String email, String password) {
-        this.firstName= firstName;
-        this.lastName = lastName;
+    public User(String firstname, String lastname, String email, String phone, String password) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
-        this.username = email;
+        this.phone = phone;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        this.profile = new Profile(ProfileEnum.USER.name());
-        this.accountNonExpired = true;
-        this.accountNonLocked = true;
-        this.credentialsNonExpired = true;
-        this.enabled = true;
     }
 
-    public User(String firstName, String lastName, String email, String password, String profilePictureUrl) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String firstname, String lastname, String email, String phone, String password, Profile profile) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.email = email;
+        this.phone = phone;
+        this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        this.profile = profile;
+    }
+
+    public User(String firstname, String lastname, String email, String profilePictureUrl) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.email = email;
         this.username = email;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
@@ -181,4 +187,20 @@ public class User implements UserDetails {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
