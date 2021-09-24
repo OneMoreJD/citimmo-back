@@ -1,12 +1,15 @@
-package com.wcs.citimmo.entities;
+package com.wcs.citimmo.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wcs.citimmo.enums.ProfileEnum;
+import com.wcs.citimmo.util.BCryptManagerUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+
 
 @Entity
 @Table(name = "user")
@@ -17,10 +20,13 @@ public class User implements UserDetails {
     private String firstName;
     private String lastName;
     private String email;
+    @Column(unique=true)
     private String username;
+    @JsonIgnore
     private String password;
     private String profilePictureUrl;
 
+  //  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH)
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
@@ -35,8 +41,8 @@ public class User implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.username = email;
-        this.password = password;
-        this.profile = new Profile(ProfileEnum.USER);
+        this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        this.profile = new Profile(ProfileEnum.USER.name());
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
@@ -48,8 +54,8 @@ public class User implements UserDetails {
         this.lastName = lastName;
         this.email = email;
         this.username = email;
-        this.password = password;
-        this.profile = new Profile(ProfileEnum.USER);
+        this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        this.profile = new Profile(ProfileEnum.REAL_ESTATE_AGENT.name());
         this.profilePictureUrl = profilePictureUrl;
         this.accountNonExpired = true;
         this.accountNonLocked = true;
@@ -62,13 +68,13 @@ public class User implements UserDetails {
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
         this.enabled = true;
-        this.profile = new Profile(ProfileEnum.USER);
+        this.profile = new Profile(ProfileEnum.USER.name());
     }
 
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return AuthorityUtils.commaSeparatedStringToAuthorityList(getProfile().getProfileName().name());
+        return AuthorityUtils.commaSeparatedStringToAuthorityList(getProfile().getLabel());
     }
 
     public Long getId() {
@@ -118,6 +124,9 @@ public class User implements UserDetails {
     }
 
     public void setPassword(String password) {
+        if (!password.isEmpty()) {
+            this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        }
         this.password = password;
     }
 

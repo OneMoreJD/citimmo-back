@@ -1,6 +1,6 @@
-package com.wcs.citimmo.repositories;
+package com.wcs.citimmo.repository;
 
-import com.wcs.citimmo.entities.User;
+import com.wcs.citimmo.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserRepository extends JpaRepository<User, Long> {

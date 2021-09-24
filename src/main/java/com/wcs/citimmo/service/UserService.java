@@ -1,12 +1,16 @@
-package com.wcs.citimmo.services;
+package com.wcs.citimmo.service;
 
-import com.wcs.citimmo.entities.User;
-import com.wcs.citimmo.repositories.UserRepository;
+import com.wcs.citimmo.dto.UserDto;
+import com.wcs.citimmo.entity.User;
+import com.wcs.citimmo.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.Collections;
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -25,7 +29,11 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("No user present with username : " + username);
         } else {
-            return user;
+            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
         }
+    }
+
+    public User save(UserDto userdto) {
+        return userRepository.save(new User(userdto.getFirstName(), userdto.getLastName(), userdto.getEmail(), userdto.getPassword()));
     }
 }
