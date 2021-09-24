@@ -1,7 +1,6 @@
 package com.wcs.citimmo.service;
 
 import com.wcs.citimmo.dto.ProfileDto;
-import com.wcs.citimmo.entity.Profile;
 import com.wcs.citimmo.mappers.ProfileMapper;
 import com.wcs.citimmo.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;

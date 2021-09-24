@@ -22,12 +22,10 @@ public class User implements UserDetails {
     private String email;
     @Column(unique=true)
     private String username;
-    @JsonIgnore
+    @Column(length = 1024)
     private String password;
     private String profilePictureUrl;
     private String phone;
-    @Column(length = 4096)
-    private String password;
 
     @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
@@ -43,6 +41,7 @@ public class User implements UserDetails {
         this.lastname = lastname;
         this.email = email;
         this.phone = phone;
+        this.username = email;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
     }
 
@@ -53,6 +52,7 @@ public class User implements UserDetails {
         this.phone = phone;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
         this.profile = profile;
+        this.username = email;
     }
 
     public User(String firstname, String lastname, String email, String profilePictureUrl) {
@@ -83,28 +83,28 @@ public class User implements UserDetails {
         return AuthorityUtils.commaSeparatedStringToAuthorityList(getProfile().getLabel());
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 
     public String getLastName() {
-        return lastName;
+        return lastname;
     }
 
     public void setLastName(String lastName) {
-        this.lastName = lastName;
+        this.lastname = lastName;
     }
 
     public String getEmail() {
@@ -122,11 +122,6 @@ public class User implements UserDetails {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    @Override
-    public String getPassword() {
-        return password;
     }
 
     public void setPassword(String password) {
@@ -197,10 +192,6 @@ public class User implements UserDetails {
     }
     public String getPassword() {
         return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
 }
