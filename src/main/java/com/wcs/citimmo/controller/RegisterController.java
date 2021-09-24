@@ -21,7 +21,6 @@ public class RegisterController {
     @ResponseBody
     public RegisterDto registerUser(@RequestBody RegisterDto registerDto){
         registerService.registerUser(registerDto);
-        System.out.println(registerDto);
         return registerDto ;
     }
 }
