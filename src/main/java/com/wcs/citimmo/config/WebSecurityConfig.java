@@ -26,8 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final String userRole = ProfileEnum.USER.name();
     private final String agentRole = ProfileEnum.REAL_ESTATE_AGENT.name();
 
-  //  private final UserDetailsService userDetailsService;
-
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
