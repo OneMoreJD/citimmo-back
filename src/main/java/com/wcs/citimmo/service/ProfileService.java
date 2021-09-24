@@ -16,7 +16,7 @@ public class ProfileService {
     ProfileMapper profileMapper;
 
     public ProfileDto getUserProfileDto(){
-        return profileMapper.getUserProfileDto(profileRepository.findByLabel("user"));
+        return profileMapper.getUserProfileDto(profileRepository.findByLabel("USER"));
     }
 
 }

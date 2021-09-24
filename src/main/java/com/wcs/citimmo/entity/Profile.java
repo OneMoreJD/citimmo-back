@@ -1,6 +1,7 @@
 package com.wcs.citimmo.entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -10,6 +11,8 @@ public class Profile {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String label;
+    @OneToMany(cascade={CascadeType.ALL}, mappedBy="profile")
+    private List<User> bList = new ArrayList<User>();
 
     public Profile() {
     }

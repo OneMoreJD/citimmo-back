@@ -13,9 +13,10 @@ public class User {
     private String email;
     private String profilePictureUrl;
     private String phone;
+    @Column(length = 4096)
     private String password;
 
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinColumn(name = "profile_id", referencedColumnName = "id")
     private Profile profile;
 

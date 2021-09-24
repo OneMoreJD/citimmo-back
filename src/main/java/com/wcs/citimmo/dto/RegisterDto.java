@@ -19,6 +19,7 @@ public class RegisterDto {
         this.email = email;
         this.password = password;
     }
+
     public RegisterDto(String firstname, String lastname, String email, String password, String phone) {
         this.firstname = firstname;
         this.lastname = lastname;

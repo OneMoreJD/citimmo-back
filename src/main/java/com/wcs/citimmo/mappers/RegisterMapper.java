@@ -12,6 +12,6 @@ public class RegisterMapper {
     ProfileMapper profileMapper;
 
     public User registerDtoToNewUser(RegisterDto registerDto){
-        return new User(registerDto.getFirstname(), registerDto.getLastname(), registerDto.getEmail(), registerDto.getPhone(), registerDto.getPassword(), profileMapper.getProfile(registerDto.getProfileDto()));
+        return new User(registerDto.getFirstname(), registerDto.getLastname(), registerDto.getEmail(), registerDto.getPhone(), registerDto.getPassword(), profileMapper.getProfileEntity(registerDto.getProfileDto()));
     }
 }

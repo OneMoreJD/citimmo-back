@@ -20,6 +20,7 @@ public class RegisterController {
     @PostMapping(value="/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public RegisterDto registerUser(@RequestBody RegisterDto registerDto){
+        registerService.registerUser(registerDto);
         System.out.println(registerDto);
         return registerDto ;
     }

@@ -10,7 +10,7 @@ public class ProfileMapper {
          return new ProfileDto(userProfile.getId(), userProfile.getLabel());
     }
 
-    public Profile getProfile(ProfileDto profileDto){
+    public Profile getProfileEntity(ProfileDto profileDto){
         return new Profile(profileDto.getId(), profileDto.getLabel());
     }
 }
