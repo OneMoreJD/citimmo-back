@@ -1,6 +1,7 @@
 package com.wcs.citimmo.service;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -24,12 +25,21 @@ public class AdvertService {
         adverts.add(new Advert(200000, TransactionType.buy, new Address("14", "rue des cerisiers", 94300, "Vincennes")));
         adverts.add(new Advert(1500, TransactionType.rent, new Address("54", "rue des pommiers", 94300, "Vincennes")));
         
-        List<Advert> filteredList = adverts.stream()
-            .filter(a -> a.getTransactionType() == dto.getType())
-            .filter(a -> a.getPrice() <= dto.getBudget())
-            .filter(a -> a.getAddress().getCity().equals(dto.getLocation()))
-            .collect(Collectors.toList());
+        List<Advert> filteredList = new ArrayList<Advert>();
+        Iterator locIterator = dto.getLocations().iterator();
+        
+        while (locIterator.hasNext()) {
+            String location = locIterator.next().toString();
+            List<Advert> filtered = new ArrayList<Advert>();
+            filtered = adverts.stream()
+                  .filter(a -> a.getTransactionType() == dto.getType())
+                  .filter(a -> a.getPrice() <= dto.getBudget())
+                  .filter(a -> a.getAddress().getCity().equals(location))
+                  .collect(Collectors.toList());
+            filteredList.addAll(filtered);
+        }
         
         return filteredList;
     }
+
 }
