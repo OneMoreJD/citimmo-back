@@ -1,9 +1,9 @@
 package com.wcs.citimmo.dto;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import com.wcs.citimmo.entity.TransactionType;
@@ -11,14 +11,14 @@ import com.wcs.citimmo.entity.TransactionType;
 public class QuickSearchDto {
 
     private TransactionType type;
-    private Set locations;
+    private List<String> locations;
     private int budget;
 
     public QuickSearchDto(String type, String locations, Optional<Integer> budget) {
         super();
         
         this.type = convertToTransactionType(type);
-        this.locations = convertToLocationsSet(locations);
+        this.locations = convertToLocationsList(locations);
         if (budget.isPresent()) {
             this.budget = budget.get();
         } else {
@@ -26,10 +26,8 @@ public class QuickSearchDto {
         }
     }
 
-    private Set convertToLocationsSet(String locations) {
-        Set<String> locs = new HashSet<String>();
-        locs = Arrays.stream(locations.split(",")).collect(Collectors.toSet());
-        return locs;
+    private List<String> convertToLocationsList(String locations) {
+        return Arrays.stream(locations.split(",")).collect(Collectors.toList());
     }
 
     public QuickSearchDto() {
@@ -53,11 +51,11 @@ public class QuickSearchDto {
         type = aType;
     }
 
-    public Set getLocations() {
+    public List<String> getLocations() {
         return locations;
     }
 
-    public void setLocations(Set aLocations) {
+    public void setLocations(List<String> aLocations) {
         locations = aLocations;
     }
 

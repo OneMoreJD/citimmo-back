@@ -2,6 +2,8 @@ package com.wcs.citimmo.entity;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -19,6 +21,7 @@ public class Advert {
     private String title;
     private String description;
     private int price;
+    @Enumerated(EnumType.STRING)
     private TransactionType transactionType;
     
     @OneToOne(cascade = CascadeType.ALL)
