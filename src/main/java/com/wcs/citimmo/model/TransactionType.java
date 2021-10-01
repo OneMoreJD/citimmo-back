@@ -1,4 +1,4 @@
-package com.wcs.citimmo.entity;
+package com.wcs.citimmo.model;
 
 public enum TransactionType {
     buy,

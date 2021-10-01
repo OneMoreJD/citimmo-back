@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-import com.wcs.citimmo.entity.TransactionType;
+import com.wcs.citimmo.model.TransactionType;
 
 public class QuickSearchDto {
 

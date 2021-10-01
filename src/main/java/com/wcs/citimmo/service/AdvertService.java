@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import com.wcs.citimmo.dto.QuickSearchDto;
 import com.wcs.citimmo.entity.Address;
 import com.wcs.citimmo.entity.Advert;
-import com.wcs.citimmo.entity.TransactionType;
+import com.wcs.citimmo.model.TransactionType;
 import com.wcs.citimmo.repository.AdvertRepository;
 
 @Service

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import com.wcs.citimmo.entity.Advert;
-import com.wcs.citimmo.entity.TransactionType;
+import com.wcs.citimmo.model.TransactionType;
 
 @Repository
 public interface AdvertRepository extends JpaRepository<Advert, Integer> {
