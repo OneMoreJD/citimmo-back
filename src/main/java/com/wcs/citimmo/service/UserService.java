@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -42,7 +40,7 @@ public class UserService implements UserDetailsService {
     }
 
     public RegisterDto registerUser(RegisterDto registerDto){
-        System.out.println(registerDto.getPassword());
+        System.out.println("registerDto.getPassword() : "+registerDto.getPassword());
         if(!isAlreadyRegistered(registerDto.getEmail())){
             registerDto.setProfileDto(profileService.getUserProfileDto());
             userRepository.save(registerMapper.registerDtoToNewUser(registerDto));
