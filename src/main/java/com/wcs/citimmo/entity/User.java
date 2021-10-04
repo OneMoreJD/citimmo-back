@@ -43,6 +43,10 @@ public class User implements UserDetails {
         this.phone = phone;
         this.username = email;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
+        this.enabled = true;
     }
 
     public User(String firstname, String lastname, String email, String phone, String password, Profile profile) {
@@ -53,16 +57,19 @@ public class User implements UserDetails {
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
         this.profile = profile;
         this.username = email;
+        this.accountNonExpired = true;
+        this.accountNonLocked = true;
+        this.credentialsNonExpired = true;
+        this.enabled = true;
     }
 
-    public User(String firstname, String lastname, String email, String profilePictureUrl) {
+    public User(String firstname, String lastname, String email, String password) {
         this.firstname = firstname;
         this.lastname = lastname;
         this.email = email;
         this.username = email;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        this.profile = new Profile(ProfileEnum.REAL_ESTATE_AGENT.name());
-        this.profilePictureUrl = profilePictureUrl;
+        this.profile = new Profile(ProfileEnum.USER.name());
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;

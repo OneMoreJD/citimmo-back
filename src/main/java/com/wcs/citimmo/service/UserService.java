@@ -11,8 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.Collections;
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -33,7 +31,7 @@ public class UserService implements UserDetailsService {
         if (user == null) {
             throw new UsernameNotFoundException("No user present with username : " + username);
         } else {
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.getAuthorities());
+            return user;
         }
     }
 
@@ -42,7 +40,7 @@ public class UserService implements UserDetailsService {
     }
 
     public RegisterDto registerUser(RegisterDto registerDto){
-        System.out.println(registerDto.getPassword());
+        System.out.println("registerDto.getPassword() : "+registerDto.getPassword());
         if(!isAlreadyRegistered(registerDto.getEmail())){
             registerDto.setProfileDto(profileService.getUserProfileDto());
             userRepository.save(registerMapper.registerDtoToNewUser(registerDto));

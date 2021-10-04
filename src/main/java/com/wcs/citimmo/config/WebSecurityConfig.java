@@ -26,8 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final String userRole = ProfileEnum.USER.name();
     private final String agentRole = ProfileEnum.REAL_ESTATE_AGENT.name();
 
-  //  private final UserDetailsService userDetailsService;
-
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
@@ -51,18 +49,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
-
-
-/*    @Autowired
-    public WebSecurityConfig(UserDetailsService userDetailsService) {
-        this.userDetailsService = userDetailsService;
-    }
-
-    @Autowired
-    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService).passwordEncoder(BCryptManagerUtil.passwordencoder());
-    }
-*/
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
@@ -71,7 +57,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .formLogin().disable()
             .authorizeRequests()
                 .antMatchers("/login", "/register").permitAll()
-         //       .antMatchers("/testing").hasRole(userRole)
+                .antMatchers("/testing").hasAnyAuthority(userRole,agentRole)
         // all other requests need to be authenticated
         .anyRequest().authenticated().and()
 
