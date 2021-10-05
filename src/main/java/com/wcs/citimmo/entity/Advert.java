@@ -1,7 +1,12 @@
 package com.wcs.citimmo.entity;
 
+import java.time.LocalDate;
+
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -9,79 +14,53 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.wcs.citimmo.model.ConditionType;
+import com.wcs.citimmo.model.EstateType;
+import com.wcs.citimmo.model.HeatingType;
+import com.wcs.citimmo.model.TransactionType;
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "advert")
+@Getter
+@Setter
+@NoArgsConstructor
 public class Advert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    
     private String title;
     private String description;
     private int price;
+    private int rooms;
+    private int bedrooms;
+    private double surfaceIn;
+    private double surfaceOut;
+    private LocalDate publicationDate;
+    private LocalDate contructionDate;
+    private int nbCarInGarage;
+    private ConditionType conditionType;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "status_id", referencedColumnName = "id")
+    private Status status;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private TransactionType transactionType;
+    
+    @Enumerated(EnumType.STRING)
+    private EstateType estateType;
+    
+    @Enumerated(EnumType.STRING)
+    private HeatingType heatingType;
     
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int aId) {
-        id = aId;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String aTitle) {
-        title = aTitle;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String aDescription) {
-        description = aDescription;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int aPrice) {
-        price = aPrice;
-    }
-
-    public Address getAddress() {
-        return address;
-    }
-
-    public void setAddress(Address aAddress) {
-        address = aAddress;
-    }
-
-    public TransactionType getTransactionType() {
-        return transactionType;
-    }
-
-    public void setTransactionType(TransactionType aTransactionType) {
-        transactionType = aTransactionType;
-    }
-
-    public Advert() {
-        super();
-    }
-
-    public Advert(int aPrice, TransactionType aTransactionType, Address aAddress) {
-        super();
-        price = aPrice;
-        transactionType = aTransactionType;
-        address = aAddress;
-    }
-    
 }
