@@ -73,19 +73,9 @@ public class JwtTokenUtil implements Serializable {
 
     public Boolean validateToken(String token, UserDetails userDetails) {
 
-        //       SecretKeySpec secretKeySpec = new SecretKeySpec(secret.getBytes(), SIGNATURE_ALGORITHM.getJcaName());
-        //       DefaultJwtSignatureValidator validator = new DefaultJwtSignatureValidator(SIGNATURE_ALGORITHM, secretKeySpec);
-        //       if (!validator.isValid(getHeader(token) + "." + getPayload(token), getSignature(token))) {
-        //           throw new RuntimeException("Could not verify JWT token integrity!");
-        //       }
-
         final String username = getUsernameFromToken(token);
-        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token));
+        return (username.equals(userDetails.getUsername()) && !isTokenExpired(token) && userDetails.isAccountNonLocked() && userDetails.isEnabled() && userDetails.isAccountNonExpired());
     }
-
-    //   private String getHeader(String token) { return token.split("//.")[0]; }
-    //   private String getPayload(String token) { return token.split("//.")[1]; }
-    //   private String getSignature(String token) { return token.split("//.")[2]; }
 
 }
 
