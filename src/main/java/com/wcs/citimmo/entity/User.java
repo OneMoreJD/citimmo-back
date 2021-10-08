@@ -1,7 +1,6 @@
 package com.wcs.citimmo.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.wcs.citimmo.enums.ProfileEnum;
+import com.wcs.citimmo.model.ProfileType;
 import com.wcs.citimmo.util.BCryptManagerUtil;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.AuthorityUtils;
@@ -69,7 +68,7 @@ public class User implements UserDetails {
         this.email = email;
         this.username = email;
         this.password = BCryptManagerUtil.passwordencoder().encode(password);
-        this.profile = new Profile(ProfileEnum.USER.name());
+        this.profile = new Profile(ProfileType.USER.name());
         this.accountNonExpired = true;
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
@@ -81,7 +80,7 @@ public class User implements UserDetails {
         this.accountNonLocked = true;
         this.credentialsNonExpired = true;
         this.enabled = true;
-        this.profile = new Profile(ProfileEnum.USER.name());
+        this.profile = new Profile(ProfileType.USER.name());
     }
 
 
