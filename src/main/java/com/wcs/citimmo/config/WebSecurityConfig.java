@@ -1,7 +1,7 @@
 package com.wcs.citimmo.config;
 
 
-import com.wcs.citimmo.enums.ProfileEnum;
+import com.wcs.citimmo.model.ProfileType;
 import com.wcs.citimmo.util.BCryptManagerUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -23,8 +23,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final String userRole = ProfileEnum.USER.name();
-    private final String agentRole = ProfileEnum.REAL_ESTATE_AGENT.name();
+    private final String userRole = ProfileType.USER.name();
+    private final String agentRole = ProfileType.REAL_ESTATE_AGENT.name();
 
     @Autowired
     private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
