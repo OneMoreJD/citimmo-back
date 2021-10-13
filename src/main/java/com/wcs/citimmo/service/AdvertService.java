@@ -1,13 +1,12 @@
 package com.wcs.citimmo.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.concurrent.locks.Condition;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.wcs.citimmo.model.ConditionType;
+import com.wcs.citimmo.model.EstateType;
 import com.wcs.citimmo.model.HeatingType;
 import com.wcs.citimmo.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +36,12 @@ public class AdvertService {
     public List<String> getAllTransactionTypes(){
         return Stream.of(TransactionType.values())
                 .map(TransactionType::name)
+                .collect(Collectors.toList());
+    }
+
+    public List<String> getAllEstateTypes(){
+        return Stream.of(EstateType.values())
+                .map(EstateType::name)
                 .collect(Collectors.toList());
     }
 

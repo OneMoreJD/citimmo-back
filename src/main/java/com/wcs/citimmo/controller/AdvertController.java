@@ -46,7 +46,7 @@ public class AdvertController {
 
     @GetMapping("/adverts/filters/estatetype")
     public ResponseEntity<Object>getEstateTypes(){
-        return ResponseHandler.generateResponse("Estate types", HttpStatus.OK, advertService.getAllTransactionTypes());
+        return ResponseHandler.generateResponse("Estate types", HttpStatus.OK, advertService.getAllEstateTypes());
     }
 
     @GetMapping("/adverts/filters/heatingtype")
