@@ -38,19 +38,11 @@ public class UserService implements UserDetailsService {
         return userRepository.save(new User(userdto.getFirstName(), userdto.getLastName(), userdto.getEmail(), userdto.getPassword()));
     }
 
-<<<<<<< HEAD
-    public RegisterDto registerUser(RegisterDto registerDto){
-        System.out.println("registerDto.getPassword() : "+registerDto.getPassword());
-        if(!isAlreadyRegistered(registerDto.getEmail())){
-            registerDto.setProfileDto(profileService.getUserProfileDto());
-            userRepository.save(registerMapper.registerDtoToNewUser(registerDto));
-=======
     public Boolean registerUser(RegisterDto registerDto){
         if(isAlreadyRegistered(registerDto.getEmail())){
             return Boolean.FALSE;
->>>>>>> 26e5baecc55cf4134f2efb728af39f8ebc6ef8b2
         }
-        registerDto.setProfileDto(profileService.getUserProfileDto());
+        registerDto.setProfileDto(profileService.getProfileDto());
         userRepository.save(registerMapper.registerDtoToNewUser(registerDto));
         return Boolean.TRUE;
     }

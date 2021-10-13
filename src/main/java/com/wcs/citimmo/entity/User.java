@@ -30,8 +30,8 @@ public class User implements UserDetails {
     private String profilePictureUrl;
     private String phone;
 
-    @ManyToOne(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
-    @JoinColumn(name = "profile_id", referencedColumnName = "id")
+    @ManyToOne
+    @JoinColumn(name = "profile_id", referencedColumnName = "id", nullable = false)
     private Profile profile;
 
     private boolean accountNonExpired;
