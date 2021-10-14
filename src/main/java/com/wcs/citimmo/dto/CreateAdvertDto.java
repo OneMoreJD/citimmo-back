@@ -22,17 +22,14 @@ public class CreateAdvertDto {
     private int price;
     private int rooms;
     private int bedrooms;
-    private double surfaceIn;
-    private double surfaceOut;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate publicationDate;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private LocalDate contructionDate;
-    private int nbCarInGarage;
-    private ConditionType conditionType;
-    private Status status;
-    private TransactionType transactionType;
-    private EstateType estateType;
-    private HeatingType heatingType;
+    private double indoorSurface;
+    private double outdoorSurface;
+    @DateTimeFormat(pattern = "dd-MM-yyyy")
+    private LocalDate constructionDate;
+    private int parkingQuantity;
+    private String conditionType;
+    private String transactionType;
+    private String estateType;
+    private String heatingType;
 
 }

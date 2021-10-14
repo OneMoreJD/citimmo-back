@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.wcs.citimmo.dto.CreateAdvertDto;
+import com.wcs.citimmo.mappers.CreateAdvertMapper;
 import com.wcs.citimmo.model.ConditionType;
 import com.wcs.citimmo.model.EstateType;
 import com.wcs.citimmo.model.HeatingType;
@@ -25,12 +27,25 @@ public class AdvertService {
     AdvertRepository advertRepo;
 
     @Autowired
+    CreateAdvertMapper createAdvertMapper;
+
+    @Autowired
     StatusRepository statusRepo;
 
     private List<Advert> adverts = new ArrayList<Advert>();
 
     public List<Advert> findAdvertsByCriteria(QuickSearchDto dto) {
         return advertRepo.quickSearch(dto.getType(), dto.getBudget(), dto.getLocations());
+    }
+
+    public Boolean createAdvert(CreateAdvertDto createAdvertDto){
+        try {
+            advertRepo.save(createAdvertMapper.advertDtoToAdvert(createAdvertDto));
+        } catch (Exception e){
+            System.out.println(e);
+            return Boolean.FALSE;
+        }
+        return Boolean.TRUE;
     }
 
     public List<String> getAllTransactionTypes(){
