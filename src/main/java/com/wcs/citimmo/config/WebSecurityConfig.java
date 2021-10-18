@@ -61,7 +61,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
             .formLogin().disable()
             .authorizeRequests()
-                .antMatchers("/login", "/register").permitAll()
+                .antMatchers(
+                        "/login",
+                        "/register",
+                        "/adverts/search",
+                        "/adverts/quicksearch",
+                        "/estates").permitAll()
                 .antMatchers("/testing").hasAnyAuthority(userRole,agentRole)
         // all other requests need to be authenticated
         .anyRequest().authenticated().and()
