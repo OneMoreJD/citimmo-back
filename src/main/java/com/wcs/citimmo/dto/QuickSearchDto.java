@@ -37,7 +37,7 @@ public class QuickSearchDto {
     private TransactionType convertToTransactionType(String type) {
         try {
             TransactionType transactionType = TransactionType.valueOf(type);
-            return transactionType;            
+            return transactionType;
         } catch (IllegalArgumentException ex) {
             return TransactionType.buy;
         }
