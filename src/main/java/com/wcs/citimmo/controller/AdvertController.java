@@ -57,6 +57,7 @@ public class AdvertController {
                 intSurfaceMax,
                 extSurfaceMax);
         return advertService.findAdvertsByCriteria(dto);
+    }
 
     @GetMapping("/adverts/filters/conditiontype")
     public ResponseEntity<Object> getConditionTypes(){
