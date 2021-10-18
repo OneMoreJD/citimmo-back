@@ -42,7 +42,7 @@ public class UserService implements UserDetailsService {
         if(isAlreadyRegistered(registerDto.getEmail())){
             return Boolean.FALSE;
         }
-        registerDto.setProfileDto(profileService.getUserProfileDto());
+        registerDto.setProfileDto(profileService.getProfileDto());
         userRepository.save(registerMapper.registerDtoToNewUser(registerDto));
         return Boolean.TRUE;
     }
