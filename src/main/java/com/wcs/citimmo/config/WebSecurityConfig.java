@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	System.out.println(" userRole : " + userRole);
         http
             .csrf().disable()
             .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
@@ -66,7 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/adverts/search",
                         "/adverts/quicksearch",
-                        "/estates").permitAll()
+                        "/estates", "/uploadFile").permitAll()
                 .antMatchers("/testing").hasAnyAuthority(userRole,agentRole)
         // all other requests need to be authenticated
         .anyRequest().authenticated().and()
