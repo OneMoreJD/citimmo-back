@@ -38,7 +38,7 @@ public class CreateAdvertMapper {
         advert.setEstateType(estateTypeMapper.valueToEstateType(createAdvertDto.getEstateType()));
         advert.setConditionType(conditionTypeMapper.valueToConditionType(createAdvertDto.getConditionType()));
         advert.setHeatingType(heatingTypeMapper.valueToHeatingType(createAdvertDto.getHeatingType()));
-        advert.setAddress(addressMapper.addressDtoToAddress(createAdvertDto.getAddressDto()));
+        advert.setAddress(addressMapper.addressDtoToAddress(createAdvertDto.getAddress()));
         return advert;
     }
 }

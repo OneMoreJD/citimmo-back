@@ -31,5 +31,5 @@ public class CreateAdvertDto {
     private String transactionType;
     private String estateType;
     private String heatingType;
-    private AddressDto addressDto;
+    private AddressDto address;
 }

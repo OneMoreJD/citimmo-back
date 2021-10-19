@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.wcs.citimmo.dto.CreateAdvertDto;
+import com.wcs.citimmo.mappers.AddressMapper;
 import com.wcs.citimmo.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,9 @@ public class AdvertController {
 
     @Autowired
     AdvertService advertService;
+
+    @Autowired
+    AddressMapper addressMapper;
 
     @GetMapping(value = "/adverts/quicksearch")
     public List<Advert> quickSearch(
@@ -87,6 +91,7 @@ public class AdvertController {
     @PostMapping(value="/adverts/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> createAdvert(@RequestBody CreateAdvertDto createAdvertDto){
+        System.out.println(addressMapper.addressDtoToAddress(createAdvertDto.getAddress()));
         if(advertService.createAdvert(createAdvertDto)) {
             return ResponseHandler.generateResponse("Creation Done", HttpStatus.OK, "Advert Successfully created");
         } else {

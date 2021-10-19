@@ -9,10 +9,10 @@ public class AddressMapper {
 
     public Address addressDtoToAddress(AddressDto addressDto){
         Address address = new Address();
-        address.setNum(addressDto.getNum());
+        address.setNum(addressDto.getAtNumber());
         address.setCity(addressDto.getCity());
         address.setStreet(addressDto.getStreet());
-        address.setZipCode(Integer.parseInt(addressDto.getZipCode()));
+        address.setZipCode(Integer.parseInt(addressDto.getZipcode()));
         return address;
     }
 }
