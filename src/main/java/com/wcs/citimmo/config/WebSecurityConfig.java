@@ -56,6 +56,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+    	System.out.println(" userRole : " + userRole);
         http
             .csrf().disable()
             .cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues()).and()
@@ -68,7 +69,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/adverts/quicksearch",
                         "/adverts/{id}",
                         "/estates").permitAll()
-                .antMatchers("/adverts/create").hasAuthority(agentRole)
+                .antMatchers("/adverts/create", "/uploadFile").hasAuthority(agentRole)
                 .antMatchers("/testing").hasAnyAuthority(userRole,agentRole)
         // all other requests need to be authenticated
         .anyRequest().authenticated().and()
@@ -82,24 +83,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
-//    @Bean
-//    public WebMvcConfigurer corsConfigurer() {
-//        return new WebMvcConfigurer() {
-//                @Override
-//                public void addCorsMappings(CorsRegistry registry) {
-//                        registry.addMapping("*").allowedOrigins("*");
-//                }
-//        };
-//    }
-//
-//    @Bean
-//    CorsConfigurationSource corsConfigurationSource()
-//    {
-//        CorsConfiguration configuration = new CorsConfiguration();
-//        configuration.setAllowedOrigins("/**");
-//        configuration.setAllowedMethods(Arrays.asList("GET","POST", "PUT", "PATCH", "DELETE"));
-//        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-//        source.registerCorsConfiguration("/**", configuration);
-//        return source;
-//    }
 }
