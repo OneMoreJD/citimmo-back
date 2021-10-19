@@ -27,9 +27,9 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "advert")
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 public class Advert {
 
     @Id

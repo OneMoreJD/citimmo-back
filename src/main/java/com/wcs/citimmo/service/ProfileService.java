@@ -1,6 +1,7 @@
 package com.wcs.citimmo.service;
 
 import com.wcs.citimmo.dto.ProfileDto;
+import com.wcs.citimmo.entity.Profile;
 import com.wcs.citimmo.mappers.ProfileMapper;
 import com.wcs.citimmo.repository.ProfileRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +15,12 @@ public class ProfileService {
     @Autowired
     ProfileMapper profileMapper;
 
-    public ProfileDto getUserProfileDto(){
-        return profileMapper.getUserProfileDto(profileRepository.findByLabel("USER"));
+    public ProfileDto getProfileDto(){
+        return profileMapper.getProfileDto(profileRepository.findProfileByLabel("USER"));
+    }
+
+    public Profile getProfileLabelledUser(){
+        return profileRepository.findProfileByLabel("USER");
     }
 
 }

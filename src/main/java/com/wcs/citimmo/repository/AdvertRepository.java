@@ -17,4 +17,5 @@ public interface AdvertRepository extends JpaRepository<Advert, Integer> {
             + " AND adv.price <= :maxprice"
             + " AND add.city IN (:locations)")
     List<Advert> quickSearch(@Param("type") TransactionType transactionType, @Param("maxprice") int price, @Param("locations") List<String> locations);
+
 }

@@ -1,5 +1,6 @@
 package com.wcs.citimmo.service;
 
+import com.wcs.citimmo.dto.ReadUserDto;
 import com.wcs.citimmo.dto.RegisterDto;
 import com.wcs.citimmo.dto.UserDto;
 import com.wcs.citimmo.entity.User;
@@ -10,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
 
 @Service("userService")
 public class UserService implements UserDetailsService {
@@ -34,18 +34,27 @@ public class UserService implements UserDetailsService {
             return user;
         }
     }
+    
+    public User loadUser(String username) throws UsernameNotFoundException {
+        User user = userRepository.findByUsername(username);
+        if (user == null) {
+            throw new UsernameNotFoundException("No user present with username : " + username);
+        } else {
+            return user;
+        }
+    }
 
     public User save(UserDto userdto) {
         return userRepository.save(new User(userdto.getFirstName(), userdto.getLastName(), userdto.getEmail(), userdto.getPassword()));
     }
 
-    public RegisterDto registerUser(RegisterDto registerDto){
-        System.out.println("registerDto.getPassword() : "+registerDto.getPassword());
-        if(!isAlreadyRegistered(registerDto.getEmail())){
-            registerDto.setProfileDto(profileService.getUserProfileDto());
-            userRepository.save(registerMapper.registerDtoToNewUser(registerDto));
+    public Boolean registerUser(RegisterDto registerDto){
+        if(isAlreadyRegistered(registerDto.getEmail())){
+            return Boolean.FALSE;
         }
-        return registerDto;
+        registerDto.setProfileDto(profileService.getProfileDto());
+        userRepository.save(registerMapper.registerDtoToNewUser(registerDto));
+        return Boolean.TRUE;
     }
 
     private boolean isAlreadyRegistered(String email){
@@ -55,4 +64,7 @@ public class UserService implements UserDetailsService {
         return Boolean.FALSE;
     }
 
+    public ReadUserDto MapToReadUserDto(User user) {
+        return new ReadUserDto(user.getFirstname(), user.getLastname(), user.getEmail());
+    }
 }
