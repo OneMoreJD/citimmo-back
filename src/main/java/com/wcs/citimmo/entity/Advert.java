@@ -25,9 +25,9 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "advert")
+@NoArgsConstructor
 @Getter
 @Setter
-@NoArgsConstructor
 public class Advert {
 
     @Id
@@ -64,9 +64,4 @@ public class Advert {
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
 
-    public Advert(String title, String description, int price, int rooms,
-                  int bedrooms, double indoorSurface,
-                  double outdoorSurface, int parkingQuantity,
-                  LocalDate constructionDate, LocalDate now) {
-    }
 }
