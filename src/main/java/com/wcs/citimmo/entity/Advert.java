@@ -63,10 +63,4 @@ public class Advert {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-
-    public Advert(String title, String description, int price, int rooms,
-                  int bedrooms, double indoorSurface,
-                  double outdoorSurface, int parkingQuantity,
-                  LocalDate constructionDate, LocalDate now) {
-    }
 }

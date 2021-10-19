@@ -10,6 +10,7 @@ import com.wcs.citimmo.mappers.CreateAdvertMapper;
 import com.wcs.citimmo.model.ConditionType;
 import com.wcs.citimmo.model.EstateType;
 import com.wcs.citimmo.model.HeatingType;
+import com.wcs.citimmo.model.TransactionType;
 import com.wcs.citimmo.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
