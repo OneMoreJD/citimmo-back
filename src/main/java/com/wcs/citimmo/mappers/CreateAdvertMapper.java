@@ -3,7 +3,6 @@ package com.wcs.citimmo.mappers;
 import com.wcs.citimmo.dto.CreateAdvertDto;
 import com.wcs.citimmo.entity.Address;
 import com.wcs.citimmo.entity.Advert;
-import com.wcs.citimmo.model.TransactionType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
