@@ -2,6 +2,7 @@ package com.wcs.citimmo.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -13,6 +14,7 @@ import com.wcs.citimmo.model.HeatingType;
 import com.wcs.citimmo.model.TransactionType;
 import com.wcs.citimmo.repository.StatusRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import com.wcs.citimmo.dto.QuickSearchDto;
@@ -89,6 +91,14 @@ public class AdvertService {
             return Boolean.FALSE;
         }
         return Boolean.TRUE;
+    }
+
+    public Optional<Advert> findAdvertById(Integer id) {
+        Optional<Advert> advert = Optional.empty();
+        if (id != null) {
+            advert = advertRepo.findById(id);
+        }
+        return advert;
     }
 
     public List<String> getAllTransactionTypes(){
