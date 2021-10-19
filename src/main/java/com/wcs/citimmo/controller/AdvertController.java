@@ -87,9 +87,6 @@ public class AdvertController {
     @PostMapping(value="/adverts/create", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<Object> createAdvert(@RequestBody CreateAdvertDto createAdvertDto){
-        System.out.println(createAdvertDto.getTransactionType()+","+
-                createAdvertDto.getHeatingType()
-        );
         if(advertService.createAdvert(createAdvertDto)) {
             return ResponseHandler.generateResponse("Creation Done", HttpStatus.OK, "Advert Successfully created");
         } else {
