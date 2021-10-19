@@ -98,4 +98,14 @@ public class AdvertController {
             return ResponseHandler.generateResponse("Creation Failed", HttpStatus.INTERNAL_SERVER_ERROR, "Advert Creation Failed");
         }
     }
+
+    @GetMapping(value = "/adverts/{id}")
+    public ResponseEntity<?> getAdvertById(@PathVariable int id) {
+        if (advertService.findAdvertById(id).isPresent()) {
+            return ResponseEntity.ok(advertService.findAdvertById(id).get());
+        } else {
+           // return ResponseEntity.notFound().build();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(HttpStatus.NOT_FOUND.getReasonPhrase());
+        }
+    }
 }
