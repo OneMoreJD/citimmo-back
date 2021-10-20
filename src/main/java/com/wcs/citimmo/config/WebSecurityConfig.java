@@ -67,6 +67,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/adverts/search",
                         "/adverts/quicksearch",
+                        "/adverts/filters/*",
                         "/adverts/{id}",
                         "/estates").permitAll()
                 .antMatchers("/adverts/create", "/uploadFile").hasAuthority(agentRole)

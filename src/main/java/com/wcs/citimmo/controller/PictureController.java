@@ -1,5 +1,7 @@
 package com.wcs.citimmo.controller;
 
+import com.wcs.citimmo.service.PictureService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -14,18 +16,18 @@ import java.util.List;
 
 
 @Controller
-public class FileUploader {
+public class PictureController {
+
+   @Autowired
+   PictureService pictureService;
 
    List<String> files = new ArrayList<String>();
-
    private final Path rootLocation = Paths.get("./src/main/resources/static/img");
 
-   @CrossOrigin("http://localhost:4200")
    @PostMapping("/uploadFile")
    public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
       String message;
       System.out.println("nom fichier image : " + file.getResource().getFilename());
-      
       try {
          try {
             Files.copy(file.getInputStream(),  this.rootLocation.resolve(file.getResource().getFilename()));
