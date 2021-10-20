@@ -66,6 +66,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         "/register",
                         "/adverts/search",
                         "/adverts/quicksearch",
+                        "/adverts/filters/*",
                         "/estates").permitAll()
                 .antMatchers("/testing").hasAnyAuthority(userRole,agentRole)
         // all other requests need to be authenticated
