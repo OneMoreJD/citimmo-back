@@ -10,6 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 
 @Entity
@@ -33,6 +34,9 @@ public class User implements UserDetails {
     @ManyToOne
     @JoinColumn(name = "profile_id", referencedColumnName = "id", nullable = false)
     private Profile profile;
+    
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Application> applications;
 
     private boolean accountNonExpired;
     private boolean accountNonLocked;
