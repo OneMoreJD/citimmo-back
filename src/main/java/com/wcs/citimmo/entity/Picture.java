@@ -22,10 +22,6 @@ public class Picture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String source;
-    
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REFRESH, optional = false)
-    @JoinColumn(name="advert_id")
-    private Advert advert;
         
     public Picture() {
     }

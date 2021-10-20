@@ -66,11 +66,11 @@ public class Advert {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-        
-    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL)
-    private List<Picture> pictures;
 
     @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL)
     @JsonIgnore
     private List<Application> applications;
+
+    @OneToMany(cascade = CascadeType.ALL)
+    private List<Picture> pictures;    
 }
