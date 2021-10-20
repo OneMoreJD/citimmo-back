@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.wcs.citimmo.dto.CreateAdvertDto;
+import com.wcs.citimmo.dto.UpdateAdvertDto;
 import com.wcs.citimmo.mappers.AddressMapper;
 import com.wcs.citimmo.util.ResponseHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,8 @@ import com.wcs.citimmo.dto.QuickSearchDto;
 import com.wcs.citimmo.dto.SearchDto;
 import com.wcs.citimmo.entity.Advert;
 import com.wcs.citimmo.service.AdvertService;
+
+import javax.persistence.Id;
 
 @RestController
 @CrossOrigin("*")
@@ -96,6 +99,16 @@ public class AdvertController {
             return ResponseHandler.generateResponse("Creation Done", HttpStatus.OK, "Advert Successfully created");
         } else {
             return ResponseHandler.generateResponse("Creation Failed", HttpStatus.INTERNAL_SERVER_ERROR, "Advert Creation Failed");
+        }
+    }
+
+    @PostMapping(value="/adverts/update/{id}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<Object> updateAdvert(@RequestBody UpdateAdvertDto updateAdvertDto, @PathVariable int id){
+        if(advertService.updateAdvert(updateAdvertDto,id)) {
+            return ResponseHandler.generateResponse("Update Done", HttpStatus.OK, "Advert id:"+" Successfully updated");
+        } else {
+            return ResponseHandler.generateResponse("Update Failed", HttpStatus.INTERNAL_SERVER_ERROR, "Advert Update id:"+" Failed");
         }
     }
 
