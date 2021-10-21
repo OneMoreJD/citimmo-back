@@ -149,4 +149,7 @@ public class AdvertService {
                 .collect(Collectors.toList());
     }
 
+    public void updateStatus(Advert adv) {
+        advertRepo.save(adv);
+    }
 }

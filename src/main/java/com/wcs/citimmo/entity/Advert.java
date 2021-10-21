@@ -16,6 +16,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.wcs.citimmo.model.ConditionType;
 import com.wcs.citimmo.model.EstateType;
 import com.wcs.citimmo.model.HeatingType;
@@ -65,7 +66,11 @@ public class Advert {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     private Address address;
-        
+
+    @OneToMany(mappedBy = "advert", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Application> applications;
+
     @OneToMany(cascade = CascadeType.ALL)
     private List<Picture> pictures;    
 }
