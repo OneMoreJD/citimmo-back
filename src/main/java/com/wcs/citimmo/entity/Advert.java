@@ -38,6 +38,7 @@ public class Advert {
     private int id;
     
     private String title;
+    @Column(length = 4096)
     private String description;
     private int price;
     private int rooms;

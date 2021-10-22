@@ -3,6 +3,7 @@ package com.wcs.citimmo.mappers;
 import com.wcs.citimmo.dto.UpdateAdvertDto;
 import com.wcs.citimmo.entity.Advert;
 
+import com.wcs.citimmo.service.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,6 +23,8 @@ public class UpdateAdvertMapper {
     HeatingTypeMapper heatingTypeMapper;
     @Autowired
     AddressMapper addressMapper;
+    @Autowired
+    StatusService statusService;
 
     public Advert advertDtoToAdvert(UpdateAdvertDto updateAdvertDto){
         Advert advert = new Advert();
@@ -41,6 +44,7 @@ public class UpdateAdvertMapper {
         advert.setHeatingType(heatingTypeMapper.valueToHeatingType(updateAdvertDto.getHeatingType()));
         advert.setAddress(addressMapper.addressDtoToAddress(updateAdvertDto.getAddress()));
         advert.setPictures(updateAdvertDto.getPictures());
+        advert.setStatus(statusService.findStatus(1));
         return advert;
     }
 }
